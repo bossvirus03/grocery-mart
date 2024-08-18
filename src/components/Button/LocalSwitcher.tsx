@@ -14,12 +14,14 @@ function LocalSwitcher() {
     });
   };
   return (
-    <label className="border-2 rounded-sm">
+    <label className="w-[50px] h-[50px] bg-[#fff] dark:bg-bg-dark rounded-[8px] overflow-hidden flex justify-center items-center">
       <p className="sr-only">change language</p>
       <select
+        className="outline-none ring-0"
         disabled={isPending}
         defaultValue={localActive}
         onChange={onSelectChange}
+        style={{ background: "inherit" }}
       >
         <option value="en">EN</option>
         <option value="vi">VI</option>

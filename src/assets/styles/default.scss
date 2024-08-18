@@ -1,0 +1,93 @@
+* {
+  @apply transition-colors duration-200;
+}
+
+// ============== Common =====================
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+}
+
+#root {
+  height: 100vh;
+  overflow: hidden;
+}
+
+:root {
+  /* Your default theme */
+  --background: white;
+  --foreground: black;
+}
+
+[data-theme="dark"] {
+  --background: black;
+  --foreground: white;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Gordita", sans-serif;
+  overflow-x: hidden;
+  color: #1a162e;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.container {
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
+// ============= Slider ================
+.slick-slide > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 0px;
+}
+
+.slick-dots {
+  display: block;
+}
+.ft-slick__dots--custom {
+  height: 12px;
+  width: 12px;
+  background-color: #e5e7e9;
+  border-radius: 999px;
+  position: relative;
+  transform: translate(50%, 30%);
+}
+.slick-dots .slick-active .ft-slick__dots--custom {
+  background-color: #9e9da8;
+}
+.slick-dots-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 1rem;
+}
+
+.slick-dots-container ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.slick-next-button {
+  border: none;
+  color: #e5e7e9;
+}
+
+.slick-next-button:focus {
+  outline: none;
+}
+
+.slick-next-button:hover {
+  color: #9e9da8;
+}

@@ -1,6 +1,6 @@
 function NotFound() {
   return (
-    <html>
+    <html suppressHydrationWarning>
       <body>
         <h1>Not found</h1>
       </body>
