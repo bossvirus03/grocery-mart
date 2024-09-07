@@ -16,7 +16,7 @@ function ThemeSwitch() {
     return (
       <div
         onClick={() => setTheme("light")}
-        className="size-[50px] flex justify-center items-center bg-[#fff] dark:bg-bg-dark rounded-full"
+        className="size-[50px] flex justify-center items-center bg-whitedark:bg-dark rounded-full opacity-60"
       >
         <FiSun size={24} />
       </div>
@@ -26,7 +26,7 @@ function ThemeSwitch() {
     return (
       <div
         onClick={() => setTheme("dark")}
-        className="size-[50px] flex justify-center items-center bg-[#fff] dark:bg-bg-dark rounded-full"
+        className="size-[60px] flex justify-center items-center bg-whitedark:bg-dark rounded-full opacity-60"
       >
         <FaRegMoon size={24} />
       </div>

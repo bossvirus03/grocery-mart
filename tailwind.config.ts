@@ -5,18 +5,27 @@ const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/assets/**/**/*.{js,ts,jsx,tsx,mdx,svg}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    colors: {
-      "gray-dark": "#B9BABE",
-      "gray-light": "#9E9DA8",
-      "bg-dark": "#292E39",
-      "bg-primary": "#171C28",
-    },
     extend: {
+      colors: {
+        white: "#FFF",
+        "gray-dark": "#B9BABE",
+        "gray-light": "#9E9DA8",
+        "yellow-primary": "#FFB700",
+        "green-primary": "#67B044",
+      },
       fontFamily: {
         custom: ["Gordita", "sans-serif"],
+      },
+      backgroundColor: {
+        dark: "#292E39",
+        light: "#f6f6f6",
+        "dark-primary": "#171C28",
+        "light-primary": "#eee",
+        "light-secondary": "#fafafd",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -25,6 +34,8 @@ const config: Config = {
       },
       textColor: {
         "black-primary": "#1A162E",
+        "gray-dark": "#B9BABE",
+        "gray-light": "#9E9DA8",
       },
     },
   },

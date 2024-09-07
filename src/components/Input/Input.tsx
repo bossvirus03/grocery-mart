@@ -21,7 +21,7 @@ const Input = ({
   placeholder = "",
   name = "",
   onChange,
-  icon,
+  icon,      
 }: InputTypeProp) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);

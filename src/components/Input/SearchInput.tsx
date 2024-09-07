@@ -4,7 +4,7 @@ function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   return (
-    <div className="relative flex items-center bg-[#fff] dark:bg-bg-dark rounded-[8px] p-2">
+    <div className="relative flex items-center bg-white dark:bg-dark rounded-[8px] p-2">
       <input
         ref={inputRef}
         type="text"
@@ -25,7 +25,7 @@ function SearchInput() {
         <button>
           <CiSearch
             size={26}
-            className="text-red-600 text-lg cursor-pointer"
+            className="text-lg cursor-pointer"
             onClick={() => {
               // submit search
             }}
@@ -37,7 +37,7 @@ function SearchInput() {
         <button className="px-1">
           <CiSearch
             size={26}
-            className="text-red-600 text-lg cursor-pointer"
+            className="text-lg cursor-pointer"
             onClick={() => {
               setIsFocused(true);
               if (inputRef.current) {

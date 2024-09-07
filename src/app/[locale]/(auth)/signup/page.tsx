@@ -6,16 +6,16 @@ import Icon from "@/components/Icon/Icon";
 import CheckBox from "@/components/Input/CheckBox";
 import Input from "@/components/Input/Input";
 import Logo from "@/components/Logo/Logo";
+import { Link } from "@/i18n/routing";
 import { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { FiPhoneCall } from "react-icons/fi";
 
 export const metadata: Metadata = {
   title: "Đăng kí tài khoản  - Mua sắm Online | Grocery Mart",
   description: "Create a new account",
 };
-function page({ params: { locale } }: { params: { locale: string } }) {
+function page() {
   return (
     <div className="flex-1 flex items-center justify-center">
       <div className="max-w-[460px] text-center">
@@ -91,7 +91,7 @@ function page({ params: { locale } }: { params: { locale: string } }) {
               You have an account yet?
             </p>
             <Link
-              href={`/${locale}/signin`}
+              href={`/signin`}
               className="text-[#0071DC] text-[15px] font-[500]"
             >
               Sign In

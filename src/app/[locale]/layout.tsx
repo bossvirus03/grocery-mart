@@ -1,7 +1,7 @@
 import ThemeSwitch from "@/components/Button/ThemeSwitch";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import ThemeProvider from "../theme-provider";
+import Provider from "../provider";
 
 export default async function LocaleLayout({
   children,
@@ -16,14 +16,14 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning={true}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            <main className="dark:bg-bg-dark dark:text-gray-dark relative">
+          <Provider>
+            <main className="dark:bg-dark bg-light dark:text-gray-dark relative">
               {children}
               <div className="fixed bottom-40 right-0 m-4 flex justify-end">
                 <ThemeSwitch />
               </div>
             </main>
-          </ThemeProvider>
+          </Provider>
         </NextIntlClientProvider>
       </body>
     </html>

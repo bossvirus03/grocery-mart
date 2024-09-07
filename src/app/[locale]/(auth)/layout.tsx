@@ -3,12 +3,18 @@ import SSlider from "@/components/Slider/SSlider";
 import Image from "next/image";
 import { ReactNode } from "react";
 
-function AuthLayout({ children }: { children: ReactNode }) {
+function AuthLayout({
+  children,
+  locale,
+}: {
+  children: ReactNode;
+  locale: string;
+}) {
   return (
     <>
       {/* Mobile View */}
       <div className="md:hidden">
-        <SSlider dots>
+        <SSlider>
           {/* Slide 1 */}
           <div className="bg-[#FAFAFD] dark:bg-[#171C28] w-[422px]">
             <div className="w-full h-[calc(100%-40px)] p-4">

@@ -14,7 +14,7 @@ function LocalSwitcher() {
     });
   };
   return (
-    <label className="w-[50px] h-[50px] bg-[#fff] dark:bg-bg-dark rounded-[8px] overflow-hidden flex justify-center items-center">
+    <label className="w-[50px] h-[50px] bg-white dark:bg-dark rounded-[8px] overflow-hidden flex justify-center items-center">
       <p className="sr-only">change language</p>
       <select
         className="outline-none ring-0"
