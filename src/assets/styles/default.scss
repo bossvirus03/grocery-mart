@@ -32,6 +32,7 @@ body {
   margin: 0 auto;
 }
 
+
 // ============= Svg ===============
 
 .dark .heart-line {
@@ -39,6 +40,21 @@ body {
 }
 
 // ============= Slider ================
+
+.slick-slider,
+.slick-list,
+.slick-track,
+.slick-slide {
+  z-index: 1;
+  // -webkit-user-select: none;
+  // -moz-user-select: none;
+  // -ms-user-select: none;
+  // user-select: none;
+}
+.slick-slide {
+  position: relative; /* Hoặc position: absolute; kiểm tra xem Slick có sử dụng position không */
+  z-index: auto; /* Đặt lại z-index nếu cần */
+}
 .slick-slide > div {
   display: flex;
   justify-content: center;

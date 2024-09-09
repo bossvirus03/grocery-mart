@@ -14,8 +14,8 @@ function layout({
 }) {
   return (
     <>
-      <Header locale={locale} />
-      <div className="container">{children}</div>
+      <Header />
+      <div className="container p-5 2xl:p-0">{children}</div>
     </>
   );
 }

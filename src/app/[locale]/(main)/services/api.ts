@@ -1,5 +1,6 @@
 import { ApiUrls } from "@/config/url";
 import api from "@/lib/https/axios";
+import { MenuResponse } from "../schemas/app.schema";
 import {
   ProductDetailResponse,
   ProductListResponse,
@@ -47,6 +48,17 @@ export const apiAddProductToCart = async (id: string) => {
     { productId: id },
     {},
     { baseUrl: "" }
+  );
+  return result.data;
+};
+
+export const apiGetMenu = async () => {
+  const result = await api.get<MenuResponse>(
+    ApiUrls.getMenu,
+    {},
+    {
+      baseUrl: "",
+    }
   );
   return result.data;
 };

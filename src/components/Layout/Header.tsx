@@ -1,67 +1,151 @@
 "use client";
+import { useMenuQuery } from "@/app/[locale]/(main)/hooks/useMenu";
 import { Link } from "@/i18n/routing";
+import { breakpoints } from "@/lib/utils";
+import { useEffect, useState } from "react";
 import { BsCart2 } from "react-icons/bs";
-import { FaRegHeart } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
+import { FaCartArrowDown, FaRegHeart, FaRegUser } from "react-icons/fa";
+import { IoIosArrowDown, IoIosLogOut } from "react-icons/io";
+import { IoLanguage } from "react-icons/io5";
 import LocalSwitcher from "../Button/LocalSwitcher";
+import Dropdown from "../Dropdown/Dropdown";
 import SearchInput from "../Input/SearchInput";
 import Logo from "../Logo/Logo";
+import { MenuItems } from "../Menu/Menu";
 
-function Header({ locale }: { locale: string }) {
+function Header({}) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= breakpoints.lg);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  const { data, isPending } = useMenuQuery();
+
+  const actionMenu: MenuItems[] = [
+    {
+      key: "profile",
+      label: <Link href={`/profile`}>Profile</Link>,
+      icon: <FaRegUser />,
+    },
+    {
+      key: "cart",
+      label: <Link href={`/cart`}>Cart</Link>,
+      icon: <FaCartArrowDown size={20} />,
+    },
+    {
+      key: "language",
+      label: <LocalSwitcher />,
+      icon: <IoLanguage />,
+    },
+    {
+      key: "saved",
+      label: <Link href={`/products/saved`}>Saved</Link>,
+      icon: <FaRegHeart size={20} />,
+    },
+    {
+      key: "logout",
+      label: <p>Logout</p>,
+      icon: <IoIosLogOut className="text-red-primary" size={20} />,
+    },
+  ];
+
   return (
     <header className="bg-light-primary dark:bg-dark-primary">
-      <div className="container flex justify-between items-center h-[110px] px-[50px] py-[30px]">
-        <Link href={`/home`}>
-          <Logo />
-        </Link>
-        <nav className="flex ">
-          <ul className="flex gap-5">
-            <li>
-              <a
-                href="#"
-                className="text-sm font-medium flex justify-center items-center gap-1"
-              >
-                Departments
-                <IoIosArrowDown size={12} />
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-sm font-medium flex justify-center items-center gap-1"
-              >
-                Grocery
-                <IoIosArrowDown size={12} />
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-sm font-medium flex justify-center items-center gap-1"
-              >
-                Beauty
-                <IoIosArrowDown size={12} />
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <SearchInput />
-        <div className="flex justify-center items-center gap-5">
-          <LocalSwitcher />
-          <div className="h-[50px] flex md:w-[226px] rounded-[8px] justify-between items-center bg-white dark:bg-dark px-5">
-            <Link href={"/products/saved"}>
-              <FaRegHeart size={24} />
-            </Link>
-            <div className="w-[1px] h-[24px] bg-gray-300 mx-4 rounded-full" />
-            <Link href={"/cart"} className="">
-              <BsCart2 size={24} />
-            </Link>
-          </div>
-          <div className="size-[50px] flex justify-center items-center bg-white dark:bg-dark rounded-[8px]">
-            <Link href={`/${locale}/profile`}>AVT</Link>
+      {/* Desktop header */}
+      {!isMobile ? (
+        <div className="container flex justify-between items-center h-[110px] px-[50px] py-[30px]">
+          <Link href={`/home`}>
+            <Logo />
+          </Link>
+          <nav className="flex">
+            <ul className="flex gap-5">
+              {!isPending ? (
+                data &&
+                data?.data.data.map((menu, index: number) => (
+                  <li key={index}>
+                    <Dropdown
+                      placement="bottom"
+                      menu={menu.category.map((category) => ({
+                        key: category.id,
+                        label: <p className="font-medium">{category.name}</p>,
+                        children: category.items.map((item) => ({
+                          key: item.id,
+                          label: (
+                            <Link href={`#`} className="font-[400]">
+                              {item.name}
+                            </Link>
+                          ),
+                        })),
+                      }))}
+                      trigger={["click", "hover"]}
+                      useGrid
+                    >
+                      <p className="text-sm font-medium flex justify-center items-center gap-1 py-3">
+                        {menu.name}
+                        <IoIosArrowDown size={12} />
+                      </p>
+                    </Dropdown>
+                  </li>
+                ))
+              ) : (
+                <div
+                  role="status"
+                  className="w-full space-y-2.5 animate-pulse max-w-lg"
+                >
+                  <div className="flex items-center w-full max-w-[480px]">
+                    <div className="h-2.5 ms-3 bg-gray-200 rounded-full dark:bg-gray-700 min-w-[80px]"></div>
+                    <div className="h-2.5 ms-3 bg-gray-300 rounded-full dark:bg-gray-600 min-w-[80px]"></div>
+                    <div className="h-2.5 ms-3 bg-gray-300 rounded-full dark:bg-gray-600 min-w-[80px]"></div>
+                  </div>
+                </div>
+              )}
+            </ul>
+          </nav>
+          <SearchInput />
+          <div className="flex justify-center items-center gap-5">
+            <div className="h-[50px] flex md:w-[226px] rounded-[8px] justify-between items-center bg-white dark:bg-dark px-5">
+              <Link href={"/products/saved"}>
+                <FaRegHeart size={24} />
+              </Link>
+              <div className="w-[1px] h-[24px] bg-gray-300 mx-4 rounded-full" />
+              <Link href={"/cart"} className="">
+                <BsCart2 size={24} />
+              </Link>
+            </div>
+            <Dropdown
+              className="relative size-[50px] flex items-center justify-center"
+              menu={actionMenu}
+              trigger={["click"]}
+              placement="bottomLeft"
+            >
+              <div className="cursor-pointer">AVT</div>
+            </Dropdown>
           </div>
         </div>
-      </div>
+      ) : (
+        // Mobile header
+        <div className="container flex justify-between items-center h-[110px] px-[50px] py-[30px]">
+          <Dropdown menu={actionMenu} trigger={["click"]}>
+            hello
+          </Dropdown>
+          <Link href={`/home`}>
+            <Logo />
+          </Link>
+          <Dropdown
+            className="relative size-[50px] flex items-center justify-center"
+            menu={actionMenu}
+            trigger={["click"]}
+            placement="bottomLeft"
+          >
+            <div className="cursor-pointer">AVT</div>
+          </Dropdown>
+        </div>
+      )}
     </header>
   );
 }

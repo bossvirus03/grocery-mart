@@ -7,7 +7,7 @@ import { Settings } from "react-slick";
 import BrowerCategories from "../components/BrowerCategories/BrowerCategories";
 import SuggestedProducts from "../components/Suggestion/SuggestedProducts";
 
-function HomePage() {
+function HomePage({ params }: { params: { locale: "vi" | "en" } }) {
   const t = useTranslations("HomePage");
   const settings: Settings = {
     touchMove: true,
@@ -23,7 +23,7 @@ function HomePage() {
   return (
     <div className="min-h-[calc(100vh-110px)] flex gap-y-10 flex-col">
       <div className="mt-10 overflow-hidden">
-        <SSlider settings={settings} className="w-100%">
+        <SSlider settings={settings} className="w-[100%] ">
           <Link href={"#"} className="max-h-[455px]">
             <Image
               className="w-full max-h-[455px] max-w-[1340px] object-contain rounded-5"
@@ -49,7 +49,7 @@ function HomePage() {
           <h2 className="text-[24px] font-[700]">Browse Categories</h2>
         </div>
         <div>
-          <BrowerCategories />
+          <BrowerCategories params={params} />
         </div>
       </div>
       <div>
@@ -59,7 +59,7 @@ function HomePage() {
             Filter <PiOptionBold size={24} />
           </button>
         </div>
-        <SuggestedProducts />
+        <SuggestedProducts params={params} />
       </div>
     </div>
   );

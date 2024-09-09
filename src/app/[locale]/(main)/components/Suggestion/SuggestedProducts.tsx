@@ -5,17 +5,17 @@ import { Product } from "../../schemas/product.schema";
 import LoadingCard from "../LoadingCard/LoadingCard";
 import ProductCard from "./ProductCard";
 
-function SuggestedProducts() {
+function SuggestedProducts({ params }: { params: { locale: "vi" | "en" } }) {
   const { data, isPending } = useSuggestedProduct();
   const products = data?.data.data;
   return (
-    <div className="grid md:grid-cols-4 gap-[30px]">
+    <div className="grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-[30px] place-items-center">
       {!isPending
         ? products &&
           products.map((product: Product, index: number) => {
             return (
               <Link key={index} href={`products/${product.id}`}>
-                <ProductCard product={product}></ProductCard>
+                <ProductCard params={params} product={product}></ProductCard>
               </Link>
             );
           })

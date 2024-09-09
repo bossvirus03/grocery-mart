@@ -8,4 +8,5 @@ export const ApiUrls = {
   getProductDetail: "/product/:id",
   addProductToCart: "/cart",
   getProductsFromCart: "/cart",
+  getMenu: "/config/menu",
 };

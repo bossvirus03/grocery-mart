@@ -1,12 +1,19 @@
 import Icon from "@/components/Icon/Icon";
+import { currencyConversion } from "@/lib/utils";
 import Image from "next/image";
 import { FaRegHeart } from "react-icons/fa";
 import StarIcon from "./../../../../../assets/images/icon/StarIcon.svg";
 
-function ProductCard({ product }: { product: any }) {
+function ProductCard({
+  product,
+  params: { locale },
+}: {
+  product: any;
+  params: { locale: "vi" | "en" };
+}) {
   return (
     <>
-      <div className="rounded-[20px] flex flex-col dark:bg-dark-primary bg-white md:min-w-[312px] md:min-h-[458px] p-4 gap-4">
+      <div className="rounded-[20px] flex flex-col dark:bg-dark-primary bg-white md:min-w-[312px] max-w-[333px] md:min-h-[458px] p-4 gap-4">
         <div className="w-[280px] h-[280px] relative">
           <Image
             className="w-full h-full object-contain rounded-[8px]"
@@ -30,7 +37,7 @@ function ProductCard({ product }: { product: any }) {
         </div>
         <div className="mt-auto flex justify-between items-center">
           <span className="text-black-primary dark:text-white ">
-            ${product.price}
+            {currencyConversion(product.price, locale)}
           </span>
           <span className="flex justify-center items-center gap-2">
             <p className="dark:text-white text-[16px] text-black-primary">

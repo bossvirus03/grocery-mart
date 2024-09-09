@@ -23,8 +23,12 @@ function LocalSwitcher() {
         onChange={onSelectChange}
         style={{ background: "inherit" }}
       >
-        <option value="en">EN</option>
-        <option value="vi">VI</option>
+        <option className="px-3" value="en">
+          EN
+        </option>
+        <option className="px-3" value="vi">
+          VI
+        </option>
       </select>
     </label>
   );
