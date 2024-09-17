@@ -23,14 +23,14 @@ function Menu({
         const menuWidth = menuRef.current.offsetWidth;
         const windowWidth = window.innerWidth;
         if (menuWidth > windowWidth) {
-          menuRef.current.style.width = `${(window.innerWidth * 90) / 100}px`; // Add padding or margin as needed
-          menuRef.current.style.left = `40px`; // Add padding or margin as needed
+          menuRef.current.style.width = `${(window.innerWidth * 90) / 100}px`;
+          menuRef.current.style.left = `40px`;
         }
       }
     };
 
-    handleResize(); // Initial check on mount
-    window.addEventListener("resize", handleResize); // Update on window resize
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);

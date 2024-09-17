@@ -3,7 +3,7 @@ import { Link } from "@/i18n/routing";
 import { useSuggestedProduct } from "../../hooks/useProduct";
 import { Product } from "../../schemas/product.schema";
 import LoadingCard from "../LoadingCard/LoadingCard";
-import ProductCard from "./ProductCard";
+import ProductCard from "../Products/ProductCard";
 
 function SuggestedProducts({ params }: { params: { locale: "vi" | "en" } }) {
   const { data, isPending } = useSuggestedProduct();

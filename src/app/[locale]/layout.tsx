@@ -17,12 +17,12 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <Provider>
-            <main className="dark:bg-dark bg-light dark:text-gray-dark relative">
+            <div className="dark:bg-dark bg-light dark:text-gray-dark relative">
               {children}
               <div className="fixed bottom-40 right-0 m-4 flex justify-end">
                 <ThemeSwitch />
               </div>
-            </main>
+            </div>
           </Provider>
         </NextIntlClientProvider>
       </body>

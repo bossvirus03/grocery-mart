@@ -23,3 +23,22 @@ export interface TypeCategoryItem {
   id: string;
   name: string;
 }
+
+export interface ProfileUser {
+  data: {
+    roles: string[];
+    id: string;
+    name: string;
+    username: string;
+    email: string;
+    phoneNumber: string;
+    avatarUrl: string;
+    cart_items_count: number;
+    saved_items_count: number;
+  };
+}
+
+export interface GetMeProfileResponse {
+  code: number;
+  data: ProfileUser;
+}

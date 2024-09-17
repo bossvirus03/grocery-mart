@@ -10,12 +10,12 @@ function layout({
   params: { locale },
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: "vi" | "en" };
 }) {
   return (
     <>
-      <Header />
-      <div className="container p-5 2xl:p-0">{children}</div>
+      <Header locale={locale} />
+      <main className="container p-5 2xl:px-0">{children}</main>
     </>
   );
 }

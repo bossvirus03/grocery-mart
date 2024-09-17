@@ -1,6 +1,16 @@
 export interface ProductListResponse {
   code: number;
-  data: Data;
+  data: ProductList;
+}
+
+export interface SavedProductsResponse {
+  code: number;
+  data: ProductList;
+}
+
+export interface ProductListFromCartResponse {
+  code: number;
+  data: ProductListFromCart;
 }
 
 export interface ProductDetailResponse {
@@ -8,9 +18,24 @@ export interface ProductDetailResponse {
   data: productDetail;
 }
 
-export interface Data {
+export interface ProductList {
   data: Product[];
   total: number;
+}
+export interface ProductListFromCart {
+  data: ProductFromCart[];
+  total: number;
+}
+
+export interface ProductFromCart {
+  images: string[];
+  name: string;
+  description: string;
+  price: number;
+  id: string;
+  star: number;
+  agent: Agent;
+  quantity: number;
 }
 
 export interface Product {
@@ -38,4 +63,14 @@ export interface productDetail {
   star: number;
   agent: Agent;
   remainingQuantity: number;
+}
+
+export interface searchProductNameResponse {
+  code: number;
+  data: searchProductName;
+}
+
+export interface searchProductName {
+  data: string[];
+  total: number;
 }

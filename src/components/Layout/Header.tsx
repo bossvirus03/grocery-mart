@@ -1,7 +1,10 @@
 "use client";
 import { useMenuQuery } from "@/app/[locale]/(main)/hooks/useMenu";
+import { apiSeachProductName } from "@/app/[locale]/(main)/services/api";
 import { Link } from "@/i18n/routing";
 import { breakpoints } from "@/lib/utils";
+import { useAppStore } from "@/store/app.store";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { BsCart2 } from "react-icons/bs";
 import { FaCartArrowDown, FaRegHeart, FaRegUser } from "react-icons/fa";
@@ -9,12 +12,15 @@ import { IoIosArrowDown, IoIosLogOut } from "react-icons/io";
 import { IoLanguage } from "react-icons/io5";
 import LocalSwitcher from "../Button/LocalSwitcher";
 import Dropdown from "../Dropdown/Dropdown";
-import SearchInput from "../Input/SearchInput";
 import Logo from "../Logo/Logo";
 import { MenuItems } from "../Menu/Menu";
+import DeboundSelect from "../Select/DeboundSelect";
 
-function Header({}) {
+function Header({ locale }: { locale: "vi" | "en" }) {
   const [isMobile, setIsMobile] = useState(false);
+
+  const appStore = useAppStore();
+  const avtUrl = appStore?.userData?.avatarUrl || "";
 
   useEffect(() => {
     const handleResize = () => {
@@ -24,7 +30,16 @@ function Header({}) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   const { data, isPending } = useMenuQuery();
+
+  async function fetchProducts(productName: string): Promise<string[]> {
+    return apiSeachProductName(productName).then((res) =>
+      res.data.data.map((item) => {
+        return item;
+      })
+    );
+  }
 
   const actionMenu: MenuItems[] = [
     {
@@ -43,8 +58,8 @@ function Header({}) {
       icon: <IoLanguage />,
     },
     {
-      key: "saved",
-      label: <Link href={`/products/saved`}>Saved</Link>,
+      key: "favorite",
+      label: <Link href={`/favorite`}>Saved</Link>,
       icon: <FaRegHeart size={20} />,
     },
     {
@@ -106,24 +121,37 @@ function Header({}) {
               )}
             </ul>
           </nav>
-          <SearchInput />
+          {/* <SearchInput locale={locale} select /> */}
+          <DeboundSelect locale={locale} fetchOptions={fetchProducts} />
           <div className="flex justify-center items-center gap-5">
             <div className="h-[50px] flex md:w-[226px] rounded-[8px] justify-between items-center bg-white dark:bg-dark px-5">
-              <Link href={"/products/saved"}>
-                <FaRegHeart size={24} />
+              <Link
+                href={"/favorite"}
+                className="flex gap-[10px] justify-center items-center"
+              >
+                <FaRegHeart size={24} /> {appStore.userData?.saved_items_count}
               </Link>
               <div className="w-[1px] h-[24px] bg-gray-300 mx-4 rounded-full" />
-              <Link href={"/cart"} className="">
-                <BsCart2 size={24} />
+              <Link
+                href={"/cart"}
+                className="flex gap-[10px] justify-center items-center"
+              >
+                <BsCart2 size={24} /> {appStore.userData?.cart_items_count}
               </Link>
             </div>
             <Dropdown
-              className="relative size-[50px] flex items-center justify-center"
+              className="relative size-[50px] flex items-center justify-center "
               menu={actionMenu}
               trigger={["click"]}
               placement="bottomLeft"
             >
-              <div className="cursor-pointer">AVT</div>
+              <Image
+                src={`http://localhost:4324/view/image/${avtUrl}`}
+                className="cursor-pointer rounded-lg w-full h-full"
+                width={100}
+                height={100}
+                alt="avatar"
+              />
             </Dropdown>
           </div>
         </div>

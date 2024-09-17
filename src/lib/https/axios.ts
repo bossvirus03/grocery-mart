@@ -53,8 +53,6 @@ axiosInstance.interceptors.response.use(
           { withCredentials: true }
         );
         const { access_token } = res.data.data;
-        console.log("refresh res >>>>", res.data.data);
-
         localStorage.setItem(
           envConfiguration.NEXT_PUBLIC_TOKEN_KEY,
           access_token
@@ -68,7 +66,6 @@ axiosInstance.interceptors.response.use(
         console.error("Token refresh failed:", err);
       }
     }
-    console.log(error);
     return Promise.reject(error.response.data);
   }
 );

@@ -63,7 +63,7 @@ function Dropdown({
         ) {
           setIsOpen(false);
         }
-      }, 300); // Adjust delay as needed
+      }, 300);
     }
   }, [trigger]);
 
@@ -99,6 +99,7 @@ function Dropdown({
     } else {
       setMenuHeight(0);
     }
+
     if (
       (isOpen || show) &&
       menuRef.current &&
@@ -136,9 +137,12 @@ function Dropdown({
       }
     }
   }, [isOpen]);
+
   useEffect(() => {
     if (dropdownRef.current) {
-      dropdownRef.current.style.maxHeight = isOpen ? `${menuHeight}px` : "0px";
+      dropdownRef.current.style.maxHeight = isOpen
+        ? `${menuHeight}px`
+        : "0px";
     }
   }, [menuHeight, isOpen, show]);
 
@@ -188,36 +192,39 @@ function Dropdown({
             `absolute transition-all duration-300 ease-in-out`,
           ].join(" ")}
           style={{
-            maxHeight: isOpen ? `${menuHeight}px` : "0px",
             opacity: isOpen ? 1 : 0,
-            transition: "max-height 0.3s ease, opacity 0.3s ease",
+            transition: "max-height 0.3s ease, opacity 1s ease",
           }}
-          onClick={(e) => e.stopPropagation()} // Prevent dropdown from closing on click inside
+          onClick={(e) => e.stopPropagation()}
         >
+          {/* Arrow outside of the content wrapper */}
+          {useGrid && (
+            <div
+              className={[
+                "absolute w-0 h-0 border-transparent",
+                getArrowStyle(),
+                "border-t-[16px] dark:border-t-dark-secondary border-t-light-secondary",
+              ].join(" ")}
+              style={{
+                borderWidth: "16px",
+                borderColor:
+                  resolvedTheme === "dark"
+                    ? `transparent transparent #292E39 transparent`
+                    : "transparent transparent #fafafd transparent",
+              }}
+            />
+          )}
+          {/* Overflow hidden content wrapper */}
           <div
-            className={
-              useGrid
-                ? [
-                    "absolute w-0 h-0 border-transparent",
-                    getArrowStyle(),
-                    "border-t-[16px] dark:border-t-dark-secondary border-t-light-secondary",
-                  ].join(" ")
-                : ""
-            }
-            style={
-              useGrid
-                ? {
-                    borderWidth: "16px",
-                    borderColor:
-                      resolvedTheme === "dark"
-                        ? `transparent transparent #292E39 transparent`
-                        : "transparent transparent #fafafd transparent",
-                  }
-                : {}
-            }
-          />
-          <div ref={menuRef}>
-            <Menu useGrid={useGrid} items={menu} />
+            style={{
+              maxHeight: isOpen ? `${menuHeight}px` : "0px",
+              overflow: "hidden",
+              transition: "max-height 0.3s ease",
+            }}
+          >
+            <div ref={menuRef}>
+              <Menu useGrid={useGrid} items={menu} />
+            </div>
           </div>
         </div>
       )}

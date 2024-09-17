@@ -11,6 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        "gray-primary": "#D2D1D6",
         white: "#FFF",
         "gray-dark": "#B9BABE",
         "gray-light": "#9E9DA8",
@@ -23,6 +24,7 @@ const config: Config = {
         "dark-primary": "#171C28",
         "light-primary": "#eee",
         "light-secondary": "#fafafd",
+        "black-primary": "#1A162E",
       },
       fontFamily: {
         custom: ["Gordita", "sans-serif"],

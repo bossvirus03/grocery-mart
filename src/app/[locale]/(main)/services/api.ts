@@ -1,9 +1,12 @@
 import { ApiUrls } from "@/config/url";
 import api from "@/lib/https/axios";
-import { MenuResponse } from "../schemas/app.schema";
+import { GetMeProfileResponse, MenuResponse } from "../schemas/app.schema";
 import {
   ProductDetailResponse,
+  ProductListFromCartResponse,
   ProductListResponse,
+  SavedProductsResponse,
+  searchProductNameResponse,
 } from "../schemas/product.schema";
 
 export const apiGetProductByGategories = async () => {
@@ -25,7 +28,7 @@ export const apiGetSuggestedProducts = async () => {
 };
 
 export const apiGetProductsFromCart = async () => {
-  const result = await api.get<ProductListResponse>(
+  const result = await api.get<ProductListFromCartResponse>(
     ApiUrls.getProductsFromCart,
     {},
     { baseUrl: "" }
@@ -61,4 +64,59 @@ export const apiGetMenu = async () => {
     }
   );
   return result.data;
+};
+
+export const apiSeachProductName = async (query: string) => {
+  const result = await api.get<searchProductNameResponse>(
+    ApiUrls.searchProductName,
+    {
+      params: { q: encodeURIComponent(query) },
+    },
+    { baseUrl: "" }
+  );
+  return result.data;
+};
+
+export const apiSeachProductDetails = async (query: string) => {
+  const result = await api.get<ProductListResponse>(
+    ApiUrls.searchProductDetails,
+    {
+      params: { q: encodeURIComponent(query) },
+    },
+    { baseUrl: "" }
+  );
+  return result.data;
+};
+
+export const apiUpdateCartItemQuantity = async (
+  productId: string,
+  quantity: string
+) => {
+  const result = await api.patch<any>(
+    ApiUrls.updateProductFromCart.concat(`/${productId}`),
+    {
+      quantity,
+    },
+    {},
+    { baseUrl: "" }
+  );
+  return result.data;
+};
+
+export const apiGetSavedProducts = async () => {
+  const result = await api.get<SavedProductsResponse>(
+    ApiUrls.apiGetSavedProducts,
+    {},
+    { baseUrl: "" }
+  );
+  return result.data;
+};
+
+export const apiGetMe = async () => {
+  const data = await api.get<GetMeProfileResponse>(
+    ApiUrls.getMe,
+    {},
+    { baseUrl: "" }
+  );
+  return data?.data;
 };

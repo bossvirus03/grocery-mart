@@ -1,12 +1,13 @@
 "use client";
-import Image from "next/image";
 import LoadingCard from "../../components/LoadingCard/LoadingCard";
 import { useGetProductsFromCart } from "../../hooks/useProduct";
+import CartProduct from "./CartProduct";
 
-function ListCart() {
+function ListCart({ locale }: { locale: "vi" | "en" }) {
   const { data, isPending } = useGetProductsFromCart();
+  console.log(data);
   return (
-    <div>
+    <div className="w-full">
       <div>
         {isPending ? (
           [...Array(4)].map((_, index) => (
@@ -17,31 +18,10 @@ function ListCart() {
         ) : (
           <>
             {data && (
-              <div>
+              <div className="bg-white dark:bg-dark-primary rounded-[20px]">
                 {data.data.data.map((product, index) => (
-                  <div key={index}>
-                    <div className="flex">
-                      <Image
-                        width={175}
-                        height={175}
-                        src={product.images[0]}
-                        alt=""
-                      />
-                      <div>
-                        <div className="flex justify-between items-center">
-                          <h2>{product.name}</h2>
-                          <p>${product.price}</p>
-                        </div>
-                        <p>
-                          ${product.price}{" "}
-                          <span className="text-green-primary">In Stock</span>
-                        </p>
-                        <div>
-                          <h3>{product.agent.name}</h3>
-                          <p>5</p>
-                        </div>
-                      </div>
-                    </div>
+                  <div key={index} className="p-[30px] ">
+                    <CartProduct product={product} locale={locale} />
                   </div>
                 ))}
               </div>
