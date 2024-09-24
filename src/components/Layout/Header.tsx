@@ -1,4 +1,5 @@
 "use client";
+import useLogout from "@/app/[locale]/(main)/hooks/useLogout";
 import { useMenuQuery } from "@/app/[locale]/(main)/hooks/useMenu";
 import { apiSeachProductName } from "@/app/[locale]/(main)/services/api";
 import { Link } from "@/i18n/routing";
@@ -18,7 +19,7 @@ import DeboundSelect from "../Select/DeboundSelect";
 
 function Header({ locale }: { locale: "vi" | "en" }) {
   const [isMobile, setIsMobile] = useState(false);
-
+  const { logoutUser } = useLogout();
   const appStore = useAppStore();
   const avtUrl = appStore?.userData?.avatarUrl || "";
 
@@ -40,7 +41,10 @@ function Header({ locale }: { locale: "vi" | "en" }) {
       })
     );
   }
-
+  const handleLogout = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await logoutUser();
+  };
   const actionMenu: MenuItems[] = [
     {
       key: "profile",
@@ -64,7 +68,11 @@ function Header({ locale }: { locale: "vi" | "en" }) {
     },
     {
       key: "logout",
-      label: <p>Logout</p>,
+      label: (
+        <button type="submit" onClick={(e: any) => handleLogout(e)}>
+          Logout
+        </button>
+      ),
       icon: <IoIosLogOut className="text-red-primary" size={20} />,
     },
   ];

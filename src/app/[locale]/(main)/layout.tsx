@@ -1,5 +1,6 @@
 import Header from "@/components/Layout/Header";
 import { Metadata } from "next";
+import MainProvider from "./MainProvider";
 
 export const metadata: Metadata = {
   title: "Grocery Mart | Mua và Bán Trên Di Động Hoặc Website",
@@ -13,10 +14,12 @@ function layout({
   params: { locale: "vi" | "en" };
 }) {
   return (
-    <>
-      <Header locale={locale} />
-      <main className="container p-5 2xl:px-0">{children}</main>
-    </>
+    <MainProvider>
+      <>
+        <Header locale={locale} />
+        <main className="container p-5 2xl:px-0">{children}</main>
+      </>
+    </MainProvider>
   );
 }
 

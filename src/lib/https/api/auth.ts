@@ -17,6 +17,17 @@ const authApiRequest = {
       },
       { baseUrl: "" }
     ),
+  NextSevrerLogout: (refreshToken: string) =>
+    api.get(
+      "/auth/logout",
+      {
+        withCredentials: true,
+        headers: {
+          Cookie: `refreshToken=${refreshToken}`,
+        },
+      },
+      { baseUrl: "" }
+    ),
 };
 
 export default authApiRequest;

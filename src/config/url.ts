@@ -1,8 +1,10 @@
 export const ApiUrls = {
   apiBaseUrl: "http://localhost:4324",
   login: "/auth/login",
+  logout: "/auth/logout",
   register: "/auth/register",
   getMe: "/user/me",
+
   refreshToken: "/auth/refresh",
   getBrowserGategories: "/product",
   getSuggestedProducts: "/product",

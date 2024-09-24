@@ -9,6 +9,11 @@ import {
   searchProductNameResponse,
 } from "../schemas/product.schema";
 
+export const LogoutApi = async () => {
+  const data: any = await api.get(ApiUrls.logout, {});
+  return data?.data;
+};
+
 export const apiGetProductByGategories = async () => {
   const result = await api.get<ProductListResponse>(
     ApiUrls.getSuggestedProducts,

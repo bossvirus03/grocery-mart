@@ -5,15 +5,15 @@ export class AsyncStorageUtils {
    * @param value
    */
   static save(key: string, value: string): void {
-    localStorage.setItem(key, value);
+    if (typeof window != undefined) localStorage.setItem(key, value);
   }
 
   /**
    * Lấy giá trị từ trong AsyncStorage
    * @param key
    */
-  static get(key: string): string | null {
-    return localStorage.getItem(key);
+  static get(key: string): string | null | undefined {
+    if (typeof window != undefined) return localStorage.getItem(key);
   }
 
   /**
@@ -21,6 +21,6 @@ export class AsyncStorageUtils {
    * @param key
    */
   static remove(key: string): void {
-    return localStorage.removeItem(key);
+    if (typeof window != undefined) return localStorage.removeItem(key);
   }
 }

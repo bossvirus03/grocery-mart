@@ -7,4 +7,5 @@ export interface JwtPayload {
   userTypes: TypeUserRole[];
   gender?: string;
   avatarUrl?: string;
+  coverPhotoUrl?: string;
 }

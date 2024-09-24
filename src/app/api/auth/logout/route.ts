@@ -1,35 +1,21 @@
 import { CustomError } from "@/lib/errors/error";
 import authApiRequest from "@/lib/https/api/auth";
-import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
-export async function POST() {
+export async function GET() {
   const cookieStore = cookies();
   const refreshToken = await cookieStore.get("refreshToken")?.value;
+  console.log("check refresh token", refreshToken);
   try {
-    const { data } = await authApiRequest.NextServerRefresh(
+    const { data } = await authApiRequest.NextSevrerLogout(
       refreshToken as string
     );
-    const {
-      data: { access_token, refresh_token },
-    } = data;
-    const decodedRefreshToken = jwtDecode(refresh_token) as { exp: number };
-    cookieStore.set("loggedIn", String(Boolean(access_token)), {
-      path: "/",
-      httpOnly: true,
-      sameSite: "lax",
-      secure: true,
-    });
-    cookieStore.set("refreshToken", refresh_token, {
-      path: "/",
-      httpOnly: true,
-      sameSite: "lax",
-      secure: true,
-      expires: new Date(decodedRefreshToken.exp * 1000),
-    });
+    console.log("sendddddddđ", data);
+    cookieStore.set("loggedIn", String(false));
+    cookieStore.set("refreshToken", "");
     return Response.json(data);
   } catch (error) {
-    cookieStore.delete("loggedIn");
+    console.error("Failed to logout:", error);
     if (error instanceof CustomError) {
       return Response.json(
         { message: error.message },
