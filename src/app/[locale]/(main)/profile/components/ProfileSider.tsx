@@ -1,15 +1,17 @@
 "use client";
 import { useAppStore } from "@/store/app.store";
 import Image from "next/image";
-import { useState } from "react";
 import { BsExclamationCircle, BsExclamationDiamond } from "react-icons/bs";
 import { CiSaveDown2 } from "react-icons/ci";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoGiftOutline, IoMailOutline, IoPersonOutline } from "react-icons/io5";
 import { LuMapPin, LuShieldCheck } from "react-icons/lu";
 
-function ProfileSider() {
-  const [info, setInfo] = useState<any>();
+function ProfileSider({
+  setPage,
+}: {
+  setPage: (value: "main" | "credit" | "info") => void;
+}) {
   const appStore = useAppStore();
   const coverPhotoUrl = appStore?.userData?.coverPhotoUrl || "";
   const avtUrl = appStore?.userData?.avatarUrl || "";
@@ -45,7 +47,10 @@ function ProfileSider() {
         <div>
           <h2 className="text-[18px]">Manage Account</h2>
           <ul className="mt-[17px]">
-            <li className="flex items-center gap-[10px] font-[400] text-[15px] mt-3">
+            <li
+              className="flex items-center gap-[10px] font-[400] text-[15px] mt-3 cursor-pointer"
+              onClick={() => setPage("info")}
+            >
               <IoPersonOutline size={20} />
               Personal info
             </li>

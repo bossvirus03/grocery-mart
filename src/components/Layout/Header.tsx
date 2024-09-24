@@ -2,6 +2,7 @@
 import useLogout from "@/app/[locale]/(main)/hooks/useLogout";
 import { useMenuQuery } from "@/app/[locale]/(main)/hooks/useMenu";
 import { apiSeachProductName } from "@/app/[locale]/(main)/services/api";
+import envConfiguration from "@/config/envConfiguration";
 import { Link } from "@/i18n/routing";
 import { breakpoints } from "@/lib/utils";
 import { useAppStore } from "@/store/app.store";
@@ -19,7 +20,11 @@ import DeboundSelect from "../Select/DeboundSelect";
 
 function Header({ locale }: { locale: "vi" | "en" }) {
   const [isMobile, setIsMobile] = useState(false);
-  const { logoutUser } = useLogout();
+  const accessToken = localStorage.getItem(
+    envConfiguration.NEXT_PUBLIC_TOKEN_KEY
+  );
+  const { logoutUser } = useLogout(accessToken);
+
   const appStore = useAppStore();
   const avtUrl = appStore?.userData?.avatarUrl || "";
 
@@ -43,7 +48,7 @@ function Header({ locale }: { locale: "vi" | "en" }) {
   }
   const handleLogout = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await logoutUser();
+    logoutUser();
   };
   const actionMenu: MenuItems[] = [
     {

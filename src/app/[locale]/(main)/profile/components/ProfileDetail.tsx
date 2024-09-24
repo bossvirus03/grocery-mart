@@ -1,14 +1,25 @@
+"use client";
+import { useAppStore } from "@/store/app.store";
+
 function ProfileDetail() {
+  const appStore = useAppStore();
+  console.log(appStore?.userData?.email);
   return (
     <div className="dark:bg-dark-primary bg-light-primary w-full rounded-[20px] p-[30px] flex flex-col gap-[30px]">
       <div>
         <h1 className="text-[24px] font-bold">My Wallet</h1>
         <p className="font-[400] text-[15px] mt-1">Payment methods</p>
         <div>
-          <ul className="flex ">
-            <li className="w-[281px] h-[171px]">Cart</li>
-            <li className="w-[281px] h-[171px]">Cart</li>
-            <li className="w-[281px] h-[171px]">Cart</li>
+          <ul className="flex gap-[30px] w-full">
+            <li className="w-full h-[171px] flex justify-center items-center bg-blue-400 rounded-[10px]">
+              Cart
+            </li>
+            <li className="w-full h-[171px] flex justify-center items-center bg-red-400 rounded-[10px]">
+              Cart
+            </li>
+            <li className="w-full h-[171px] flex justify-center items-center bg-gray-400 rounded-[10px]">
+              Cart
+            </li>
           </ul>
         </div>
       </div>

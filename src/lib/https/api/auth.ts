@@ -17,17 +17,22 @@ const authApiRequest = {
       },
       { baseUrl: "" }
     ),
-  NextSevrerLogout: (refreshToken: string) =>
-    api.get(
+  NextSevrerLogout: async (refreshToken: string, accessToken: string) => {
+    console.log("send logout base url");
+    const res = await api.get(
       "/auth/logout",
       {
         withCredentials: true,
         headers: {
           Cookie: `refreshToken=${refreshToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
       { baseUrl: "" }
-    ),
+    );
+    console.log("next to be >>>", res);
+    return res;
+  },
 };
 
 export default authApiRequest;

@@ -2,13 +2,18 @@ import { CustomError } from "@/lib/errors/error";
 import authApiRequest from "@/lib/https/api/auth";
 import { cookies } from "next/headers";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const parts = request.url.split("access_token=");
+  const accessToken = parts[1];
+  console.log(request.url);
+  console.log("access >>>>>>>>", accessToken);
   const cookieStore = cookies();
   const refreshToken = await cookieStore.get("refreshToken")?.value;
   console.log("check refresh token", refreshToken);
   try {
     const { data } = await authApiRequest.NextSevrerLogout(
-      refreshToken as string
+      refreshToken as string,
+      accessToken as string
     );
     console.log("sendddddddđ", data);
     cookieStore.set("loggedIn", String(false));

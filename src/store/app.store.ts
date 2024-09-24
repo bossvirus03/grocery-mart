@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { create } from "zustand";
 
 export interface UserData extends JwtPayload {
+  email: string;
   cart_items_count: number;
   saved_items_count: number;
 }

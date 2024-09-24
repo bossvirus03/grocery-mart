@@ -1,11 +1,9 @@
-import ProfileDetail from "./components/ProfileDetail";
-import ProfileSider from "./components/ProfileSider";
+import ProfilePage from "./components/ProfilePage";
 
 function page() {
   return (
-    <div className="md:flex gap-[30px]">
-      <ProfileSider />
-      <ProfileDetail />
+    <div>
+      <ProfilePage />
     </div>
   );
 }

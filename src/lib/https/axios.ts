@@ -29,7 +29,7 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
-    return Promise.reject(error.response.data);
+    return Promise.reject(error.response?.data);
   }
 );
 
@@ -41,12 +41,10 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
     if (
       originalRequest.url != ApiUrls.login &&
-      originalRequest.url != ApiUrls.logout &&
       error.response &&
       error.response.status === 401 &&
       !originalRequest._retry
     ) {
-      console.log(111111111111111111111111111);
       originalRequest._retry = true;
       try {
         const res = await api.post<LoginResType>(
@@ -56,7 +54,6 @@ axiosInstance.interceptors.response.use(
         );
         const { access_token } = res.data.data;
         if (!isServer) {
-          console.log("helloooooo");
           localStorage.setItem(
             envConfiguration.NEXT_PUBLIC_TOKEN_KEY,
             access_token
@@ -66,13 +63,14 @@ axiosInstance.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${access_token}`;
         return axiosInstance(originalRequest);
       } catch (err) {
-        if (!isServer) console.log(err);
-        localStorage.removeItem("accessToken");
-        window.location.href = "/en/signin";
+        if (!isServer) {
+          localStorage.removeItem(envConfiguration.NEXT_PUBLIC_TOKEN_KEY);
+          window.location.href = "/en/signin";
+        }
         console.error("Token refresh failed:", err);
       }
     }
-    return Promise.reject(error.response.data);
+    return Promise.reject(error.response?.data);
   }
 );
 

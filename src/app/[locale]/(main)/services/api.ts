@@ -9,8 +9,10 @@ import {
   searchProductNameResponse,
 } from "../schemas/product.schema";
 
-export const LogoutApi = async () => {
-  const data: any = await api.get(ApiUrls.logout, {});
+export const LogoutApi = async (access_token: string | null) => {
+  const data: any = await api.get(ApiUrls.logout, {
+    params: { access_token: access_token },
+  });
   return data?.data;
 };
 

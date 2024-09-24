@@ -1962,14 +1962,14 @@ negotiator@^0.6.3:
   resolved "https://registry.npmjs.org/negotiator/-/negotiator-0.6.3.tgz"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-next-intl@^3.19.1:
-  version "3.19.1"
-  resolved "https://registry.npmjs.org/next-intl/-/next-intl-3.19.1.tgz"
-  integrity sha512-KlJSomzbB5dNkWBIiSIRaoy5zqwLgHNV5Zw0ULhkHjNnPN7aLFFv2G+VOQKle630sNH2JiKc9nsmi6PM1GdkhA==
+next-intl@^3.19.4:
+  version "3.19.4"
+  resolved "https://registry.npmjs.org/next-intl/-/next-intl-3.19.4.tgz"
+  integrity sha512-ywJZS+i+CEBYrZq5RXhoBLpjIQBzcVGWclb/CLUO6Lua+ECPM+uJVTb9WascBDT44bSaPcJT11+ZyaEuWEtlOA==
   dependencies:
     "@formatjs/intl-localematcher" "^0.5.4"
     negotiator "^0.6.3"
-    use-intl "^3.19.1"
+    use-intl "^3.19.4"
 
 next-themes@^0.3.0:
   version "0.3.0"
@@ -2853,10 +2853,10 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-use-intl@^3.19.1:
-  version "3.19.1"
-  resolved "https://registry.npmjs.org/use-intl/-/use-intl-3.19.1.tgz"
-  integrity sha512-FUblDZJ/iuXusroBxvzVwXmgjHIef2YHJ0ASRmkMV8whlcRr6QJozBZUR/xB4I0+MMbWDD4GPugUK+MxE2coJA==
+use-intl@^3.19.4:
+  version "3.19.4"
+  resolved "https://registry.npmjs.org/use-intl/-/use-intl-3.19.4.tgz"
+  integrity sha512-mMUlie/zWiKfO8erR+17dCBL8tBsMWCadqfu/3fipzxVJ8XzZV477k6EBllXR/WfbamwwDFmb6RgYKhHDxGzYw==
   dependencies:
     "@formatjs/fast-memoize" "^2.2.0"
     intl-messageformat "^10.5.14"
