@@ -1,11 +1,17 @@
 "use client";
+import { getAuthToken } from "@/lib/token";
 import { useAppStore } from "@/store/app.store";
-import { ReactNode, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { apiGetMe } from "./services/api";
 
-function MainProvider({ children }: { children: ReactNode }) {
-  const appStore = useAppStore();
-
+function MainProvider({
+  children,
+  locale,
+}: {
+  children: React.ReactNode;
+  locale: "vi" | "en";
+}) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -20,6 +26,14 @@ function MainProvider({ children }: { children: ReactNode }) {
 
     fetchUserData();
   }, []);
+  const router = useRouter();
+  const appStore = useAppStore();
+  const isLoggined = getAuthToken();
+
+  if (!isLoggined) {
+    router.push(`/${locale}/signin`);
+    return null;
+  }
 
   return <>{children}</>;
 }

@@ -45,9 +45,9 @@ function Menu({
           " bg-light-secondary dark:bg-dark-secondary p-5",
           useGrid
             ? level == 0
-              ? `grid grid-cols-1 md:grid-cols-4 gap-4 pl-${
+              ? `grid grid-cols-1 2xl:grid-cols-4 lg:grid-cols-3 gap-4 pl-${
                   level * 4
-                } w-[1420px]` + " rounded-[20px] gap-[77px]"
+                } 2xl:w-[1420px] lg:w-[800px]` + " rounded-[20px] gap-[77px]"
               : "rounded-md mt-5"
             : "min-w-[270px] rounded-[20px]",
           className,

@@ -1,7 +1,11 @@
 "use client";
 import { useAppStore } from "@/store/app.store";
 
-function ProfileDetail() {
+function ProfileDetail({
+  setPage,
+}: {
+  setPage: (value: "main" | "credit" | "info") => void;
+}) {
   const appStore = useAppStore();
   console.log(appStore?.userData?.email);
   return (

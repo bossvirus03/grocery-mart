@@ -20,6 +20,11 @@ import DeboundSelect from "../Select/DeboundSelect";
 
 function Header({ locale }: { locale: "vi" | "en" }) {
   const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false)
+ 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
   const accessToken = localStorage.getItem(
     envConfiguration.NEXT_PUBLIC_TOKEN_KEY
   );

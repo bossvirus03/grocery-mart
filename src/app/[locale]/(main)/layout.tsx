@@ -14,7 +14,7 @@ function layout({
   params: { locale: "vi" | "en" };
 }) {
   return (
-    <MainProvider>
+    <MainProvider locale={locale}>
       <>
         <Header locale={locale} />
         <main className="container p-5 2xl:px-0">{children}</main>
